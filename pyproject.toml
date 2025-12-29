@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "py-hd44780-i2c-pcf8574"
-version = "0.0.0"
+version = "0.0.1"
 description = "HD44780 over I2C (PCF8574) via MCP2221A"
 requires-python = ">=3.10"
 dependencies = ["PyMCP2221A"]
