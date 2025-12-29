@@ -11,12 +11,11 @@ if not getattr(sys, "frozen", False):
     if str(PROJECT_ROOT) not in sys.path:
         sys.path.insert(0, str(PROJECT_ROOT))
 
-from py_hd44780_i2c_pcf8574 import HD44780_PCF8574, LCDS, VARIANT_A, VARIANT_B, VARIANT_C
-from py_hd44780_i2c_pcf8574.lcdx import HD44780Config
-from py_hd44780_i2c_pcf8574.mcp2221a_i2c import MCP2221AI2C
+# NOTE: Hardware-specific imports are intentionally delayed until runtime,
+# so `--dry-run` can work on machines without MCP2221A / hidapi.
 
 
-def _scan_i2c(i2c: MCP2221AI2C) -> list[int]:
+def _scan_i2c(i2c) -> list[int]:
     found: list[int] = []
     for addr in range(0x03, 0x78):
         try:
@@ -65,6 +64,11 @@ def main() -> None:
     parser.add_argument("--address", default="0x3F", help="PCF8574 7-bit I2C address (default: 0x3F)")
     parser.add_argument("--scan", action="store_true", help="Scan I2C and use first responding address")
     parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Render to console only (do not access MCP2221A / LCD)",
+    )
+    parser.add_argument(
         "--variant",
         choices=["A", "B", "C"],
         default="A",
@@ -103,7 +107,27 @@ def main() -> None:
     raw = file_path.read_bytes()[: max(0, args.max_bytes)]
     text = raw.decode(args.encoding, errors="replace")
 
+    # Dry run: render without talking to hardware.
+    if args.dry_run:
+        cols, rows = 16, 2
+        lines = _render_head(text, cols, rows)
+        print(f"File: {file_path}")
+        print(f"Virtual LCD geometry: {cols}x{rows}")
+        for i, line in enumerate(lines):
+            print(f"Rendered line{i + 1}: {line!r}")
+        if args.pause:
+            try:
+                input("Press Enter to exit...")
+            except EOFError:
+                pass
+        return
+
     address_7bit = int(args.address, 0)
+
+    from py_hd44780_i2c_pcf8574 import HD44780_PCF8574, LCDS, VARIANT_A, VARIANT_B, VARIANT_C
+    from py_hd44780_i2c_pcf8574.lcdx import HD44780Config
+    from py_hd44780_i2c_pcf8574.mcp2221a_i2c import MCP2221AI2C
+
     mapping = {"A": VARIANT_A, "B": VARIANT_B, "C": VARIANT_C}[args.variant]
 
     i2c = MCP2221AI2C(i2c_speed_hz=100_000).open()
