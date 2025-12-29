@@ -25,6 +25,8 @@ Wiring details: [docs/wiring.md](docs/wiring.md)
 
 Create a virtual environment and install dependencies:
 
+Requires Python 3.10+.
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
