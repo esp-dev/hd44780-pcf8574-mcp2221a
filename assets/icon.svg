@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Transparent background by default -->
+
+  <!-- Document (behind) -->
+  <g transform="translate(140,140)">
+    <path d="M160 0h330l170 170v420c0 54-44 98-98 98H160c-54 0-98-44-98-98V98c0-54 44-98 98-98z" fill="#2F80ED"/>
+    <path d="M490 0v130c0 54 44 98 98 98h130" fill="#56CCF2"/>
+    <path d="M160 0h330l170 170" fill="none" stroke="#1F5FB5" stroke-width="22" stroke-linejoin="round" opacity="0.55"/>
+    <g opacity="0.55" stroke="#EAF3FF" stroke-width="20" stroke-linecap="round">
+      <line x1="170" y1="290" x2="560" y2="290"/>
+      <line x1="170" y1="360" x2="520" y2="360"/>
+      <line x1="170" y1="430" x2="480" y2="430"/>
+    </g>
+  </g>
+
+  <!-- LCD module (front) -->
+  <g transform="translate(170,430)">
+    <!-- outer case -->
+    <rect x="0" y="0" rx="88" ry="88" width="760" height="420" fill="#1F2937"/>
+    <!-- bezel -->
+    <rect x="66" y="66" rx="56" ry="56" width="628" height="288" fill="#0F172A"/>
+
+    <!-- backlight -->
+    <rect x="118" y="118" rx="40" ry="40" width="524" height="184" fill="#22C55E" opacity="0.92"/>
+    <rect x="118" y="118" rx="40" ry="40" width="524" height="184" fill="#BBF7D0" opacity="0.14"/>
+
+    <!-- 2 lines hint (bold, readable at small sizes) -->
+    <g transform="translate(160,150)" fill="#0A2A16" opacity="0.55">
+      <rect x="0" y="0" width="440" height="46" rx="14"/>
+      <rect x="0" y="76" width="360" height="46" rx="14"/>
+    </g>
+  </g>
+
+</svg>

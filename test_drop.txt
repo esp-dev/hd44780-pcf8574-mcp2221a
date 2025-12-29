@@ -1,0 +1,3 @@
+Pierwsza linia pliku
+Druga linia pliku
+Trzecia linia pliku

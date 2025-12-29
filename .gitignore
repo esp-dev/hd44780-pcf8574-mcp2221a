@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Editor
+.vscode/
+.idea/
+
+# Build / packaging outputs
+build/
+dist/
+*.spec
+
+# Embedded C project and outputs
+Clock/
+
+# Ignore C/C++ sources and common embedded artifacts anywhere
+*.c
+*.h
+*.cpp
+*.hpp
+*.ino
+*.S
+*.s
+*.o
+*.a
+*.elf
+*.hex
+*.eep
+*.lss
+*.map
+*.d
+*.mk
+
+# PyInstaller/aux files (generated)
+*.toc
+*.pyz
+*.html
